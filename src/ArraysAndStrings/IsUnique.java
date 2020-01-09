@@ -15,6 +15,9 @@ public class IsUnique {
 
         System.out.println("isUnique("+t1+") = " + isUnique(t1));
         System.out.println("isUnique("+t2+") = " + isUnique(t2));
+
+        System.out.println("isUnique_noDS("+t1+") = " + isUnique_noDS(t1));
+        System.out.println("isUnique_noDS("+t2+") = " + isUnique_noDS(t2));
     }
 
     // Uses data structure
@@ -26,6 +29,20 @@ public class IsUnique {
                 return false;
             set.add(ch);
         }
+        return true;
+    }
+
+    private static boolean isUnique_noDS(String s) {
+
+        int[] bvec = new int[128];
+        for (char ch : s.toCharArray()) {
+            int i = ch;
+            int mask =  (1 << i);
+            if (bvec[i] == 1)
+                return false;
+            bvec[i] = 1;
+        }
+
         return true;
     }
 }
