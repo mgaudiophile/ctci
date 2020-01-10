@@ -20,9 +20,11 @@ public class CheckPermutation {
 
         Map<Character, Integer> map = new HashMap<>();
 
+        // build a hash map
         for (char ch : one.toCharArray())
             map.put(ch, map.getOrDefault(ch, 0) + 1);
 
+        // decrement the map values
         for (char ch : two.toCharArray()) {
             if (!map.containsKey(ch))
                 return false;
