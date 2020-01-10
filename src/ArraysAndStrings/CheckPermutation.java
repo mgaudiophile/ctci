@@ -1,13 +1,38 @@
 package ArraysAndStrings;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CheckPermutation {
 
     public static void main(String[] args) {
 
+        String one = "tools";
+        String two = "olgos";
+
+        System.out.println("checkPermutation(" + one + ", " + two + ") = " + checkPermutation(one, two));
     }
 
-    private boolean checkPermutation(String one, String two) {
+    private static boolean checkPermutation(String one, String two) {
 
-        return false;
+        if (one.length() != two.length())
+            return false;
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (char ch : one.toCharArray())
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+
+        for (char ch : two.toCharArray()) {
+            if (!map.containsKey(ch))
+                return false;
+
+            map.replace(ch, map.get(ch) - 1);
+
+            if (map.get(ch) == 0)
+                map.remove(ch);
+        }
+
+        return map.size() == 0;
     }
 }
