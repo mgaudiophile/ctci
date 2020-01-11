@@ -17,6 +17,9 @@ public class PalindromePermutation {
 
         System.out.println("palindromPerm(in) = " + palindromePerm(in));
         System.out.println("palindromPerm(in2) = " + palindromePerm(in2));
+
+        System.out.println("bitVecSoln(in) = " + bitVecSoln(in));
+        System.out.println("bitVecSoln(in2) = " + bitVecSoln(in2));
     }
 
     private static boolean palindromePerm(String in) {
@@ -38,5 +41,28 @@ public class PalindromePermutation {
         }
 
         return true;
+    }
+
+    private static boolean bitVecSoln(String in) {
+        //book assumes we have only a-z
+        int bv = 0;
+        for (char c : in.toCharArray()) {
+            if (c != ' ') {
+                c = Character.toLowerCase(c);
+                int i = c;
+                int mask = (1 << i);
+
+                // toggle
+                if ((bv & mask) > 0) {
+                    bv &= ~mask;    //flip to 0
+                } else {
+                    bv |= mask;
+                }
+            }
+        }
+
+        int bitSet = (bv & (bv - 1));
+
+        return bv == 0 || bitSet == 0;
     }
 }
